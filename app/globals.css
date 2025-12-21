@@ -85,6 +85,7 @@
 	--sidebar-ring: oklch(0.708 0 0);
 	--gray-1: #e2e8f0;
 	--gray-2: #cbd5e0;
+	--gray-3: #6c757d;
 	--primary-purple: #9013fe;
 }
 
@@ -129,4 +130,47 @@
 	body {
 		@apply bg-background text-foreground;
 	}
+}
+
+/* Ant Design Tabs Custom Styling */
+.ant-tabs {
+	font-family: inherit;
+	color: var(--gray-3) !important;
+}
+
+.ant-tabs-tab {
+	padding: 12px !important;
+	margin: 0 !important;
+	font-size: 16px;
+	font-weight: 500;
+	color: var(--gray-3) !important;
+	transition: all 0.3s ease;
+	background: transparent;
+}
+
+.ant-tabs-tab:hover {
+	background-color: hsl(272, 99%, 54%, 0.05) !important;
+	color: hsl(272, 99%, 54%) !important;
+	border-radius: 8px 8px 0 0 !important;
+}
+.ant-tabs-tab:active {
+	/* background-color: hsl(272, 99%, 54%, 0.05) !important; */
+	color: hsl(272, 99%, 54%) !important;
+	/* border-radius: 8px 8px 0 0 !important; */
+}
+
+.ant-tabs-tab-active {
+	color: hsl(272, 99%, 54%) !important;
+	background-color: hsl(272, 99%, 54%, 0.05) !important;
+	border-radius: 8px 8px 0 0 !important;
+	position: relative;
+}
+
+.ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+	color: hsl(272, 99%, 54%) !important;
+	font-weight: 500 !important;
+}
+
+.ant-tabs-ink-bar {
+	background-color: hsl(272, 99%, 54%) !important;
 }
