@@ -7,6 +7,7 @@
 	--color-gray-1: var(--gray-1);
 	--color-gray-2: var(--gray-2);
 	--color-primary-purple: var(--primary-purple);
+	--color-secondary-purple: var(--secondary-purple);
 	--color-background: var(--background);
 	--color-foreground: var(--foreground);
 	--font-sans: var(--font-geist-sans);
@@ -87,6 +88,7 @@
 	--gray-2: #cbd5e0;
 	--gray-3: #6c757d;
 	--primary-purple: #9013fe;
+	--secondary-purple: #e9d4ff;
 	--primary-blue: #70d6ff;
 }
 
