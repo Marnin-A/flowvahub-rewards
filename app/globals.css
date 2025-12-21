@@ -5,6 +5,8 @@
 
 @theme inline {
 	--color-gray-1: var(--gray-1);
+	--color-gray-2: var(--gray-2);
+	--color-primary-purple: var(--primary-purple);
 	--color-background: var(--background);
 	--color-foreground: var(--foreground);
 	--font-sans: var(--font-geist-sans);
@@ -83,6 +85,7 @@
 	--sidebar-ring: oklch(0.708 0 0);
 	--gray-1: #e2e8f0;
 	--gray-2: #cbd5e0;
+	--primary-purple: #9013fe;
 }
 
 .dark {
