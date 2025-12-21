@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Roboto_Serif } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/header/header";
 
 const robotoSerif = Roboto_Serif({
 	variable: "--font-roboto-serif",
@@ -29,7 +28,6 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body className={`${robotoSerif.variable} antialiased bg-gray-50`}>
-				<Header />
 				{children}
 			</body>
 		</html>
