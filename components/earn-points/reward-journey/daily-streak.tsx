@@ -41,7 +41,7 @@ export default function DailyStreak() {
 				<p className="text-[0.875rem] text-gray-600 text-center mt-3">
 					Check in daily to to earn +5 points
 				</p>
-				<Button className="mt-3 w-full py-6 px-6 rounded-full font-semibold flex items-center justify-center gap-2 transition-all duration-200 bg-[#9013fe] text-white hover:shadow-[0_4px_12px_rgba(144,19,254,0.2)] hover:translate-y-[-2px]">
+				<Button className="mt-3 w-full py-6 px-6 rounded-full font-semibold flex items-center justify-center gap-2 transition-all duration-200 bg-primary-purple hover:bg-primary-purple text-white hover:shadow-[0_4px_12px_rgba(144,19,254,0.2)] hover:translate-y-[-2px]">
 					<Image
 						src="/icons/lightning.svg"
 						alt="lightning"
