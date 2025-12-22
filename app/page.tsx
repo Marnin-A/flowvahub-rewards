@@ -1,9 +1,7 @@
 import EarnPoints from "@/components/earn-points";
 import Header from "@/components/header/header";
-// import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import RedeemPoints from "@/components/redeem-rewards";
-import { Tabs } from "antd";
-import type { TabsProps } from "antd";
+import { Tabs, TabsProps } from "antd";
 
 export default function Home() {
 	const items: TabsProps["items"] = [
