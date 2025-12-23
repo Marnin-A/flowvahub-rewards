@@ -20,7 +20,9 @@ export default function Home() {
 	return (
 		<main className="w-full px-4 lg:px-8 lg:pt-8 min-h-screen overflow-y-auto box-border">
 			<Header />
-			<Tabs defaultValue="earn" className="w-full mt-5" items={items} />
+			<div className="bg-transparent lg:h-[calc(100vh-110px)] [scrollbar-width:none] [-ms-overflow-style:none] overflow-x-hidden">
+				<Tabs defaultValue="earn" className="w-full" items={items} />
+			</div>
 		</main>
 	);
 }

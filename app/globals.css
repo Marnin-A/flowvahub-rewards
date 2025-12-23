@@ -142,6 +142,7 @@
 .ant-tabs {
 	font-family: inherit;
 	color: var(--gray-3) !important;
+	margin-top: 20px !important;
 }
 .ant-tabs-nav-list {
 	gap: 16px !important;
