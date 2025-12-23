@@ -29,12 +29,14 @@ export default function PointsBalance() {
 							id="lottie"
 							className="bg-transparent margin-auto outline-none overflow-hidden h-[100px] w-[100px]"
 						>
-							<Image
-								src="/icons/coin.svg"
-								alt="coin"
+							<video
+								src="/animations/coin.webm"
+								autoPlay
+								muted
+								playsInline
 								width={100}
 								height={100}
-								className="w-[100px] h-[100px]"
+								className="w-full h-full"
 							/>
 						</div>
 					</div>
