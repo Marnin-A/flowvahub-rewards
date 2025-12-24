@@ -1,4 +1,4 @@
-import Notification from "./notification";
+import Notification from "./notifications/notification";
 
 export default function Header() {
 	return (

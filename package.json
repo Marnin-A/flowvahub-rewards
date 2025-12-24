@@ -13,6 +13,7 @@
     "@babel/runtime": "^7.28.4",
     "@emotion/hash": "^0.9.2",
     "@emotion/unitless": "^0.10.0",
+    "@hookform/resolvers": "^5.2.2",
     "@radix-ui/react-slot": "^1.2.4",
     "@radix-ui/react-tabs": "^1.1.13",
     "@rc-component/util": "^1.6.0",
@@ -24,10 +25,12 @@
     "next": "16.1.0",
     "react": "19.2.3",
     "react-dom": "19.2.3",
+    "react-hook-form": "^7.69.0",
     "string-convert": "^0.2.1",
     "stylis": "^4.3.6",
     "swr": "^2.3.8",
-    "tailwind-merge": "^3.4.0"
+    "tailwind-merge": "^3.4.0",
+    "zod": "^4.2.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
