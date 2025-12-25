@@ -75,10 +75,23 @@ export async function signUp(
             });
 
             // Update referrer's points balance
-            await adminClient.rpc("increment_points", {
-                user_id: referrer.id,
+            const { error: pointsError } = await adminClient.rpc("increment_points", {
                 points_to_add: 25,
+                target_user_id: referrer.id,
             });
+
+            if (pointsError) {
+                console.error("Error updating points:", pointsError);
+            }
+
+            // Increment referrer's referral count
+            const { error: referralCountError } = await adminClient.rpc("increment_referral_count", {
+                target_user_id: referrer.id,
+            });
+
+            if (referralCountError) {
+                console.error("Error updating referral count:", referralCountError);
+            }
 
             // Create notification for referrer
             await adminClient.from("notifications").insert({
