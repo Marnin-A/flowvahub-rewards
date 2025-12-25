@@ -10,7 +10,7 @@ import { SocialLoginButton } from "@/components/ui/social-login-button";
 import { z } from "zod";
 
 const loginSchema = z.object({
-	email: z.string().email("Please enter a valid email address"),
+	email: z.email("Please enter a valid email address"),
 	password: z.string().min(1, "Password is required"),
 });
 
@@ -64,12 +64,13 @@ export default function Login() {
 						<PasswordInput
 							label="Password"
 							placeholder="••••••••"
+							bodyClassName="mb-0"
 							error={errors.password?.message}
 							{...register("password")}
 						/>
 
 						{/* Forgot Password Link */}
-						<div className="flex justify-end mb-4">
+						<div className="flex justify-end my-2">
 							<Link
 								href="/forgot-password"
 								className="text-sm text-[#9013fe] no-underline font-medium hover:underline"

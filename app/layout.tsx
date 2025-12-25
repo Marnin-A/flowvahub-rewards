@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { Roboto_Serif } from "next/font/google";
+import { Roboto } from "next/font/google";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import "./globals.css";
 
-const robotoSerif = Roboto_Serif({
-	variable: "--font-roboto-serif",
+const roboto = Roboto({
+	variable: "--font-roboto",
 	subsets: ["latin"],
 });
 
@@ -28,7 +28,7 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body className={`${robotoSerif.variable} antialiased bg-gray-50`}>
+			<body className={`${roboto.variable} antialiased bg-gray-50 font-roboto`}>
 				<AntdRegistry>{children}</AntdRegistry>
 			</body>
 		</html>

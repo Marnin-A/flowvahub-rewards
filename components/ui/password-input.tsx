@@ -7,15 +7,16 @@ export interface PasswordInputProps
 	extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "type"> {
 	label?: string;
 	error?: string;
+	bodyClassName?: string;
 }
 
 const PasswordInput = React.forwardRef<HTMLInputElement, PasswordInputProps>(
-	({ className, label, error, id, ...props }, ref) => {
+	({ className, label, error, bodyClassName, id, ...props }, ref) => {
 		const [showPassword, setShowPassword] = React.useState(false);
 		const inputId = id || props.name;
 
 		return (
-			<div className="w-full mb-5">
+			<div className={cn("w-full", bodyClassName)}>
 				{label && (
 					<label
 						htmlFor={inputId}
@@ -32,8 +33,8 @@ const PasswordInput = React.forwardRef<HTMLInputElement, PasswordInputProps>(
 							ref={ref}
 							className={cn(
 								"peer w-full border py-[11px] px-[14px] text-base border-[#EDE9FE] transition-all ease-linear duration-200 rounded-md outline-none focus:border-[#9013fe] pr-16",
-								error && "border-red-500 focus:border-red-500",
-								className
+								className,
+								error && "border-red-500 focus:border-red-500"
 							)}
 							{...props}
 						/>
