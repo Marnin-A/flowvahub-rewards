@@ -1,6 +1,7 @@
 "use server";
 
 import { createClient } from "@/lib/supabase/server";
+import { createAdminClient } from "@/lib/supabase/admin";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { passwordSchema } from "@/lib/schemas/signup-schema";
@@ -47,9 +48,12 @@ export async function signUp(
     }
 
     // If there's a referral code, update the user's profile
+    // Use admin client to bypass RLS (users can only see their own profile)
     if (referralCode && data.user) {
-        // Find the referrer by their referral code
-        const { data: referrer } = await supabase
+        const adminClient = createAdminClient();
+
+        // Find the referrer by their referral code (requires bypassing RLS)
+        const { data: referrer } = await adminClient
             .from("profiles")
             .select("id")
             .eq("referral_code", referralCode)
@@ -57,13 +61,13 @@ export async function signUp(
 
         if (referrer) {
             // Update the new user's profile with the referrer's ID
-            await supabase
+            await adminClient
                 .from("profiles")
                 .update({ referred_by: referrer.id })
                 .eq("id", data.user.id);
 
             // Award points to the referrer
-            await supabase.from("point_transactions").insert({
+            await adminClient.from("point_transactions").insert({
                 user_id: referrer.id,
                 amount: 25,
                 type: "referral",
@@ -71,13 +75,13 @@ export async function signUp(
             });
 
             // Update referrer's points balance
-            await supabase.rpc("increment_points", {
+            await adminClient.rpc("increment_points", {
                 user_id: referrer.id,
                 points_to_add: 25,
             });
 
             // Create notification for referrer
-            await supabase.from("notifications").insert({
+            await adminClient.from("notifications").insert({
                 user_id: referrer.id,
                 type: "referral",
                 title: "New Referral! 🎉",
