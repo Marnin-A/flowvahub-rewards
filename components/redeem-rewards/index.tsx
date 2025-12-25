@@ -1,16 +1,39 @@
+"use client";
+
 import { Tabs, TabsProps } from "antd";
 import Header2 from "../ui/header-2";
 import RewardsBody from "./rewards-body";
-import { rewards } from "@/lib/data";
 import Label from "./label";
+import { RewardsGridSkeleton } from "@/components/ui/skeletons";
+import { ErrorState } from "@/components/ui/error-state";
+import { useRewards } from "@/hooks/use-rewards";
 
-export default function Index() {
+export default function RedeemRewards() {
+	const { data: rewards = [], isLoading, error, refetch } = useRewards();
+
+	if (isLoading) {
+		return (
+			<div className="pb-2">
+				<Header2 title="Redeem Your Points" />
+				<RewardsGridSkeleton />
+			</div>
+		);
+	}
+
+	if (error) {
+		return (
+			<div className="pb-2">
+				<Header2 title="Redeem Your Points" />
+				<ErrorState message="Could not load rewards" onRetry={() => refetch()} />
+			</div>
+		);
+	}
+
 	const unlocked = rewards.filter((reward) => reward.status === "unlocked");
 	const locked = rewards.filter((reward) => reward.status === "locked");
-	const comingSoon = rewards.filter(
-		(reward) => reward.status === "coming-soon"
-	);
+	const comingSoon = rewards.filter((reward) => reward.status === "coming-soon");
 	const allRewards = rewards;
+
 	const items: TabsProps["items"] = [
 		{
 			key: "all-rewards",
@@ -33,6 +56,7 @@ export default function Index() {
 			children: <RewardsBody rewards={comingSoon} />,
 		},
 	];
+
 	return (
 		<div className="pb-2">
 			<Header2 title="Redeem Your Points" />

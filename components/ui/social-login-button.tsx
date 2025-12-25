@@ -1,6 +1,10 @@
+"use client";
+
 import * as React from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
+import { signInWithGoogle } from "@/lib/actions/auth";
+import { Loader2 } from "lucide-react";
 
 type SocialProvider = "google" | "facebook" | "apple" | "github";
 
@@ -38,28 +42,48 @@ function SocialLoginButton({
 	className,
 	...props
 }: SocialLoginButtonProps) {
+	const [isLoading, setIsLoading] = React.useState(false);
 	const config = providerConfig[provider];
 	const displayLabel = label || config.defaultLabel;
+
+	const handleClick = async () => {
+		if (provider === "google") {
+			setIsLoading(true);
+			await signInWithGoogle();
+			setIsLoading(false);
+		}
+	};
 
 	return (
 		<button
 			type="button"
+			disabled={isLoading}
+			onClick={handleClick}
 			className={cn(
-				"border py-[11px] px-[14px] text-sm w-full gap-2 text-[#111827] border-[#EDE9FE] rounded-md hover:bg-[#F5F3FF] transition-colors flex items-center justify-center relative",
+				"border py-[11px] px-[14px] text-sm w-full gap-2 text-[#111827] border-[#EDE9FE] rounded-md hover:bg-[#F5F3FF] transition-colors flex items-center justify-center relative disabled:opacity-50 disabled:cursor-not-allowed",
 				className
 			)}
 			{...props}
 		>
-			{config.icon && (
-				<Image
-					src={config.icon}
-					alt={provider}
-					width={24}
-					height={24}
-					className="w-6 h-6"
-				/>
+			{isLoading ? (
+				<>
+					<Loader2 className="w-6 h-6 animate-spin" />
+					<span>Connecting...</span>
+				</>
+			) : (
+				<>
+					{config.icon && (
+						<Image
+							src={config.icon}
+							alt={provider}
+							width={24}
+							height={24}
+							className="w-6 h-6"
+						/>
+					)}
+					<span>{displayLabel}</span>
+				</>
 			)}
-			<span>{displayLabel}</span>
 		</button>
 	);
 }

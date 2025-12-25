@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
+import { QueryProvider } from "@/providers/query-provider";
 import "./globals.css";
 
 const roboto = Roboto({
@@ -29,8 +30,11 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body className={`${roboto.variable} antialiased bg-gray-50 font-roboto`}>
-				<AntdRegistry>{children}</AntdRegistry>
+				<QueryProvider>
+					<AntdRegistry>{children}</AntdRegistry>
+				</QueryProvider>
 			</body>
 		</html>
 	);
 }
+

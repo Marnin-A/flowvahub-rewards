@@ -1,15 +1,46 @@
 "use client";
+
 import { Check } from "lucide-react";
 import Header2 from "../../ui/header-2";
 import Image from "next/image";
 import { useState } from "react";
 import Link from "next/link";
+import { useReferralStats, useReferralLink } from "@/hooks/use-referrals";
+import { ReferralSkeleton } from "@/components/ui/skeletons";
+import { ErrorState } from "@/components/ui/error-state";
 
 export default function ReferAndEarn() {
 	const [copied, setCopied] = useState(false);
-	const referrals = 0;
-	const pointsEarned = 0;
-	const referralLink = "https://app.flowvahub.com/signup/?ref=marni2534";
+	const { data: stats, isLoading: statsLoading, error: statsError, refetch: refetchStats } = useReferralStats();
+	const { data: referralLink, isLoading: linkLoading, error: linkError, refetch: refetchLink } = useReferralLink();
+
+	const isLoading = statsLoading || linkLoading;
+	const error = statsError || linkError;
+
+	if (isLoading) {
+		return (
+			<div>
+				<Header2 title="Refer & Earn" />
+				<ReferralSkeleton />
+			</div>
+		);
+	}
+
+	if (error || !stats || !referralLink) {
+		return (
+			<div>
+				<Header2 title="Refer & Earn" />
+				<ErrorState
+					message="Could not load referral data"
+					onRetry={() => {
+						refetchStats();
+						refetchLink();
+					}}
+				/>
+			</div>
+		);
+	}
+
 	const handleCopy = () => {
 		navigator.clipboard.writeText(referralLink);
 		setCopied(true);
@@ -21,7 +52,7 @@ export default function ReferAndEarn() {
 	return (
 		<div>
 			<Header2 title="Refer & Earn" />
-			<div className="shadow-[0_5px_15px_rgba(0,0,0,0.05)]  rounded-[16px] hover:translate-y-[-5px] hover:shadow-[0_10px_25px_rgba(0,0,0,0.1)] border border-[#f3f4f6] overflow-hidden transition-shadow duration-200">
+			<div className="shadow-[0_5px_15px_rgba(0,0,0,0.05)] rounded-[16px] hover:translate-y-[-5px] hover:shadow-[0_10px_25px_rgba(0,0,0,0.1)] border border-[#f3f4f6] overflow-hidden transition-shadow duration-200">
 				{/* Header Section */}
 				<div className="p-4 relative border border-b-[#f3f4f6] bg-[#eef2ff] border-t-0 border-r-0 border-l-0">
 					<div className="flex items-center gap-3">
@@ -42,13 +73,13 @@ export default function ReferAndEarn() {
 						<div className="flex justify-between mb-4">
 							<div className="text-center p-2 flex-1">
 								<div className="text-2xl font-semibold text-[#9013fe]">
-									{referrals}
+									{stats.referral_count}
 								</div>
 								<div className="text-gray-600">Referrals</div>
 							</div>
 							<div className="text-center p-2 flex-1">
 								<div className="text-2xl font-semibold text-[#9013fe]">
-									{pointsEarned}
+									{stats.points_earned_from_referrals}
 								</div>
 								<div className="text-gray-600">Points Earned</div>
 							</div>
@@ -61,7 +92,7 @@ export default function ReferAndEarn() {
 								<input
 									type="text"
 									readOnly
-									className="flex-1  border border-gray-300 rounded-md px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent w-full pr-10"
+									className="flex-1 border border-gray-300 rounded-md px-3 py-2 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent w-full pr-10"
 									value={referralLink}
 								/>
 								<button
@@ -84,7 +115,7 @@ export default function ReferAndEarn() {
 						{/* Footer | Social Media */}
 						<div className="flex justify-center gap-4 mt-4">
 							<Link
-								href="https://www.facebook.com/flowvahub"
+								href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(referralLink)}`}
 								className="rounded-full flex items-center justify-center w-[30px] h-[30px]"
 								style={{ backgroundColor: "rgb(24, 119, 242)" }}
 								target="_blank"
@@ -97,7 +128,7 @@ export default function ReferAndEarn() {
 								/>
 							</Link>
 							<Link
-								href="https://twitter.com/flowvahub"
+								href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(referralLink)}&text=${encodeURIComponent("Join me on Flowva and earn rewards!")}`}
 								className="rounded-full flex items-center justify-center w-[30px] h-[30px]"
 								style={{ backgroundColor: "#000" }}
 								target="_blank"
@@ -110,7 +141,7 @@ export default function ReferAndEarn() {
 								/>
 							</Link>
 							<Link
-								href="https://www.linkedin.com/company/flowvahub"
+								href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(referralLink)}`}
 								className="rounded-full flex items-center justify-center w-[30px] h-[30px]"
 								style={{ backgroundColor: "rgb(0, 119, 181)" }}
 								target="_blank"
@@ -123,7 +154,7 @@ export default function ReferAndEarn() {
 								/>
 							</Link>
 							<Link
-								href="https://wa.me/212658000000"
+								href={`https://wa.me/?text=${encodeURIComponent("Join me on Flowva! " + referralLink)}`}
 								className="rounded-full flex items-center justify-center w-[30px] h-[30px]"
 								style={{ backgroundColor: "rgb(37, 211, 102)" }}
 								target="_blank"
