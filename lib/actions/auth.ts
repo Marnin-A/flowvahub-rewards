@@ -93,7 +93,7 @@ export async function signInWithGoogle() {
     const supabase = await createClient();
 
     // The redirect URL should be your app's callback route
-    const redirectUrl = process.env.NEXT_PUBLIC_OAUTH_CALLBACK ||
+    const redirectUrl =
         `${process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"}/auth/callback`;
 
     const { data, error } = await supabase.auth.signInWithOAuth({
