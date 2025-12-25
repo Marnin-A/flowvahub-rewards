@@ -92,20 +92,27 @@ export async function signUp(
 export async function signInWithGoogle() {
     const supabase = await createClient();
 
+    // The redirect URL should be your app's callback route
+    const redirectUrl = process.env.NEXT_PUBLIC_OAUTH_CALLBACK ||
+        `${process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"}/auth/callback`;
+
     const { data, error } = await supabase.auth.signInWithOAuth({
         provider: "google",
         options: {
-            redirectTo: process.env.NEXT_PUBLIC_OAUTH_CALLBACK,
+            redirectTo: redirectUrl,
         },
     });
 
     if (error) {
+        console.error("Google OAuth error:", error);
         return { error: error.message };
     }
 
     if (data.url) {
         redirect(data.url);
     }
+
+    return { error: "Failed to initiate Google login" };
 }
 
 export async function signOut() {
