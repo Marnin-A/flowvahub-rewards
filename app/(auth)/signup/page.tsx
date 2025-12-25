@@ -15,7 +15,7 @@ import {
 } from "@/lib/schemas/signup-schema";
 import { useState, Suspense } from "react";
 import { signUp } from "@/lib/actions/auth";
-import { Loader2, CheckCircle, Circle, Check } from "lucide-react";
+import { Loader2, CheckCircle, Circle, Check, AlertCircle } from "lucide-react";
 
 function PasswordRequirements({ password }: { password: string }) {
 	const validations = validatePassword(password);
@@ -71,6 +71,7 @@ function SignupForm() {
 
 	const onSubmit = async (data: SignupFormData) => {
 		setError(null);
+		setSuccess(false);
 		const result = await signUp(
 			data.email,
 			data.password,
@@ -82,31 +83,6 @@ function SignupForm() {
 			setSuccess(true);
 		}
 	};
-
-	if (success) {
-		return (
-			<div className="flex justify-center w-full max-w-[420px]">
-				<div className="w-full shadow-[0_4px_6px_rgba(0,0,0,0.1)] py-[30px] px-[20px] lg:p-[40px] bg-white rounded-[10px] animate-fadeIn h-fit text-center">
-					<div className="flex justify-center mb-4">
-						<CheckCircle className="w-16 h-16 text-green-500" />
-					</div>
-					<h1 className="text-2xl text-[#6D28D9] font-semibold mb-[8px]">
-						Check your email
-					</h1>
-					<p className="text-sm text-[#6B7280] mb-6">
-						We've sent you a confirmation link. Please check your email to
-						verify your account.
-					</p>
-					<Link
-						href="/login"
-						className="text-[#9013fe] no-underline font-medium hover:underline"
-					>
-						Back to login
-					</Link>
-				</div>
-			</div>
-		);
-	}
 
 	return (
 		<div className="flex justify-center w-full max-w-[420px]">
@@ -125,6 +101,16 @@ function SignupForm() {
 						</p>
 					)}
 				</div>
+
+				{/* Success Message */}
+				{success && (
+					<div className="mb-4 p-3 bg-green-50 border border-green-200 rounded-md flex items-center gap-2 text-green-700">
+						<AlertCircle className="w-5 h-5 shrink-0" />
+						<p className="text-sm font-medium">
+							Verification email sent. Please check your inbox.
+						</p>
+					</div>
+				)}
 
 				{/* Error Message */}
 				{error && (
