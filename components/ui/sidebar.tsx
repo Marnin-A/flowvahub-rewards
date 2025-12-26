@@ -1,6 +1,11 @@
+'use client';
 import Image from 'next/image';
+import { useProfile } from '@/hooks/use-profile';
+import { Avatar } from 'antd';
+import { User } from 'lucide-react';
 
 export default function Sidebar() {
+  const { data: profile } = useProfile();
   return (
     <aside className="w-72 overflow-x-hidden flex flex-col h-screen shadow-md border-r border-black/10 text-black font-sans">
       <div className="flex flex-col h-full">
@@ -23,7 +28,7 @@ export default function Sidebar() {
                 text-black hover:bg-[rgba(144,19,254,0.1)] hover:text-[#9013FE]
               "
             >
-              <Image src="/icons/home.svg" alt="Home" width={24} height={24} />
+              <Image src="/icons/home.svg" alt="Home" width={18} height={16} />
               <span className="tracking-wide truncate">Home</span>
             </li>
             <li
@@ -32,7 +37,7 @@ export default function Sidebar() {
                 text-black hover:bg-[rgba(144,19,254,0.1)] hover:text-[#9013FE]
               "
             >
-              <Image src="/icons/discover.svg" alt="Discover" width={24} height={24} />
+              <Image src="/icons/discover.svg" alt="Discover" width={16} height={16} />
               <span className="tracking-wide truncate">Discover</span>
             </li>
             <li
@@ -41,7 +46,7 @@ export default function Sidebar() {
                 text-black hover:bg-[rgba(144,19,254,0.1)] hover:text-[#9013FE]
               "
             >
-              <Image src="/icons/library.svg" alt="Library" width={24} height={24} />
+              <Image src="/icons/library.svg" alt="Library" width={20} height={16} />
               <span className="tracking-wide truncate">Library</span>
             </li>
             <li
@@ -50,7 +55,7 @@ export default function Sidebar() {
                 text-black hover:bg-[rgba(144,19,254,0.1)] hover:text-[#9013FE]
               "
             >
-              <Image src="/icons/tech-stack.svg" alt="Tech Stack" width={24} height={24} />
+              <Image src="/icons/tech-stack.svg" alt="Tech Stack" width={16} height={16} />
               <span className="tracking-wide truncate">Tech Stack</span>
             </li>
             <li
@@ -59,7 +64,7 @@ export default function Sidebar() {
                 text-black hover:bg-[rgba(144,19,254,0.1)] hover:text-[#9013FE]
               "
             >
-              <Image src="/icons/subscriptions.svg" alt="Subscriptions" width={24} height={24} />
+              <Image src="/icons/subscriptions.svg" alt="Subscriptions" width={18} height={16} />
               <span className="tracking-wide truncate">Subscriptions</span>
             </li>
             <li
@@ -68,7 +73,7 @@ export default function Sidebar() {
                 bg-[rgba(144,19,254,0.2)] text-[#9013FE]
               "
             >
-              <Image src="/icons/rewards.svg" alt="Rewards" width={24} height={24} />
+              <Image src="/icons/rewards.svg" alt="Rewards" width={18} height={16} />
               <span className="tracking-wide truncate">Rewards Hub</span>
             </li>
             <li
@@ -77,7 +82,7 @@ export default function Sidebar() {
                 text-black hover:bg-[rgba(144,19,254,0.1)] hover:text-[#9013FE]
               "
             >
-              <Image src="/icons/settings.svg" alt="Settings" width={24} height={24} />
+              <Image src="/icons/settings.svg" alt="Settings" width={20} height={16} />
               <span className="tracking-wide truncate">Settings</span>
             </li>
           </ul>
@@ -87,19 +92,23 @@ export default function Sidebar() {
           <div className="w-full flex items-center justify-between px-4">
             <button className="flex items-center border-none">
               <div className="w-[40px] h-[40px] relative overflow-hidden rounded-full font-semibold mr-3 flex items-center justify-center  text-[#9013FE] bg-[#E9D4FF]">
-                <Image
-                  src="https://lh3.googleusercontent.com/a/ACg8ocJB9xfNLmk82VY8OzRgSgPYuWeO2f4iAdQSlfV25fHqRvF4QRZi=s96-c"
+                <Avatar
+                  src={profile?.avatar_url}
+                  icon={!profile?.avatar_url ? <User /> : undefined}
                   alt="User avatar"
-                  width={40}
-                  height={40}
-                  className="h-full w-full rounded-full object-cover"
+                  size="large"
+                  shape="circle"
                 />
               </div>
               <div className="text-start">
-                <span className="text-[0.9rem] font-semibold">Marnin</span>
-                <p className="text-[0.8rem] text-[#718096] truncate overflow-x-hidden max-w-[153px]">
-                  msmaudu@gmail.com
-                </p>
+                {profile?.full_name ? <span className="text-[0.9rem] font-semibold">{profile?.full_name}</span> : ''}
+                {profile?.email ? (
+                  <p className="text-[0.8rem] text-[#718096] truncate overflow-x-hidden max-w-[153px]">
+                    {profile?.email}
+                  </p>
+                ) : (
+                  ''
+                )}
               </div>
             </button>
           </div>

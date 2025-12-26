@@ -3,7 +3,6 @@ import { Roboto } from 'next/font/google';
 import { AntdRegistry } from '@ant-design/nextjs-registry';
 import { QueryProvider } from '@/providers/query-provider';
 import './globals.css';
-import SideBar from '@/components/ui/sidebar';
 
 const roboto = Roboto({
   variable: '--font-roboto',
@@ -25,13 +24,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${roboto.variable} antialiased bg-gray-50 font-roboto flex flex-col md:flex-row min-h-dvh lg:h-screen  lg:md:overflow-hidden w-full`}
+        className={`${roboto.variable} antialiased bg-gray-50 flex flex-col md:flex-row min-h-dvh lg:h-screen  lg:md:overflow-hidden w-full`}
       >
         <QueryProvider>
-          <AntdRegistry>
-            <SideBar />
-            {children}
-          </AntdRegistry>
+          <AntdRegistry>{children}</AntdRegistry>
         </QueryProvider>
       </body>
     </html>
