@@ -135,7 +135,7 @@ export default function Featured() {
 								placeholder="user@example.com"
 								className=" peer w-full border text-base py-[10px] px-[14px]  border-[#EDE9FE] transition-all ease-linear duration-200 rounded-md outline-none focus:border-[#9013fe]"
 								required
-								value=""
+
 							/>
 							<div className="pointer-events-none absolute inset-0 rounded-md peer-focus:shadow-[0_0_0_3px_rgba(124,58,237,0.1)]"></div>
 						</div>
@@ -168,6 +168,7 @@ export default function Featured() {
 						</Upload>
 						<div className="flex gap-3 justify-end mt-4">
 							<button
+								onClick={handleCancel}
 								type="button"
 								className="p-[0.5rem_1rem] rounded-[8px] font-semibold transition-all duration-200 hover:bg-[#d1d5db] bg-[#e9ecef] text-[#020617]"
 							>
