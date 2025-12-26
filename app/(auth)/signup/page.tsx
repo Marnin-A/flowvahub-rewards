@@ -97,7 +97,7 @@ function SignupForm() {
 					</p>
 					{referralCode && (
 						<p className="text-xs text-green-600 text-center mt-2 bg-green-50 py-2 rounded-md">
-							🎉 You were referred! You'll both earn bonus points.
+							🎉 You were referred with this code: <span className="font-medium">{referralCode}</span>
 						</p>
 					)}
 				</div>
