@@ -1,6 +1,6 @@
 "use client";
 
-import { Flame, CheckCircle, Users, Gift, Bell } from "lucide-react";
+import { Flame, Users, Gift, Bell, Smile } from "lucide-react";
 import NotificationHeader from "./notification-header";
 import NotificationItem from "./notification-item";
 import { EmptyNotifications } from "@/components/ui/empty-state";
@@ -14,10 +14,10 @@ import type { Notification } from "@/types/database";
 
 // Icon components for different notification types
 const NotificationIcons: Record<string, React.ReactNode> = {
-	streak: <Flame className="w-5 h-5 text-orange-500" fill="currentColor" />,
-	welcome: <CheckCircle className="w-5 h-5 text-green-500" fill="currentColor" />,
+	streak: <Flame className="w-5 h-5 text-orange-500" />,
+	welcome: <Smile className="w-5 h-5 text-green-700" />,
 	referral: <Users className="w-5 h-5 text-blue-500" />,
-	reward: <Gift className="w-5 h-5 text-yellow-500" fill="currentColor" />,
+	reward: <Gift className="w-5 h-5 text-yellow-500" />,
 	system: <Bell className="w-5 h-5 text-gray-500" />,
 };
 
