@@ -10,6 +10,7 @@ create table public.profiles (
   avatar_url text,
   referral_code text unique not null,
   referred_by uuid references public.profiles(id),
+  referral_count integer default 0 not null,
   points_balance integer default 0 not null,
   current_streak integer default 0 not null,
   last_streak_claim timestamptz,
@@ -177,6 +178,26 @@ drop trigger if exists on_profile_created on public.profiles;
 create trigger on_profile_created
   after insert on public.profiles
   for each row execute procedure public.create_welcome_notification();
+
+-- Increment user points balance (used for referrals, streaks, etc.)
+create or replace function public.increment_points(target_user_id uuid, points_to_add integer)
+returns void as $$
+begin
+  update public.profiles
+  set points_balance = points_balance + points_to_add
+  where id = target_user_id;
+end;
+$$ language plpgsql security definer;
+
+-- Increment user referral count
+create or replace function public.increment_referral_count(target_user_id uuid)
+returns void as $$
+begin
+  update public.profiles
+  set referral_count = referral_count + 1
+  where id = target_user_id;
+end;
+$$ language plpgsql security definer;
 
 -- ===========================================
 -- Indexes for performance

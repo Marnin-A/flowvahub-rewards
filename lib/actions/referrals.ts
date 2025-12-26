@@ -15,10 +15,11 @@ export async function getReferralStats(): Promise<ReferralStats | null> {
     }
 
     // Count users who were referred by this user
-    const { count: referralCount } = await supabase
+    const { data: referralCount } = await supabase
         .from("profiles")
-        .select("*", { count: "exact", head: true })
-        .eq("referred_by", user.id);
+        .select("referral_count")
+        .eq("id", user.id)
+        .single();
 
     // Get total points earned from referrals
     const { data: transactions } = await supabase
@@ -30,7 +31,7 @@ export async function getReferralStats(): Promise<ReferralStats | null> {
     const pointsEarned = transactions?.reduce((sum, tx) => sum + tx.amount, 0) || 0;
 
     return {
-        referral_count: referralCount || 0,
+        referral_count: referralCount?.referral_count || 0,
         points_earned_from_referrals: pointsEarned,
     };
 }
