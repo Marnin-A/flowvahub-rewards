@@ -52,7 +52,7 @@ export default function PointsBalance() {
 			</div>
 			<div className="p-4">
 				<div className="flex justify-between items-center">
-					<div className="font-extrabold text-[36px] text-[#9013fe] m-[10px_0]">
+					<div className="font-extrabold text-[36px] text-primary-purple m-[10px_0]">
 						{points.toLocaleString()}
 					</div>
 					<div className="lf-player-container">
@@ -81,7 +81,7 @@ export default function PointsBalance() {
 					</div>
 					<div className="h-[8px] bg-[#e5e7eb] rounded-[9999px] overflow-hidden">
 						<div
-							className="h-full bg-linear-to-br from-[#9013fe] to-[#FF9FF5] rounded-full transition-[width] duration-500 ease-in-out"
+							className="h-full bg-linear-to-br from-primary-purple to-[#FF9FF5] rounded-full transition-[width] duration-500 ease-in-out"
 							style={{ width: `${width}%` }}
 						></div>
 					</div>

@@ -29,7 +29,7 @@ const FormInput = React.forwardRef<HTMLInputElement, FormInputProps>(
 						id={inputId}
 						ref={ref}
 						className={cn(
-							"peer w-full border text-base py-[11px] px-3.5 border-[#EDE9FE] transition-all ease-linear duration-200 rounded-md outline-none focus:border-[#9013fe]",
+							"peer w-full border text-base py-[11px] px-3.5 border-[#EDE9FE] transition-all ease-linear duration-200 rounded-md outline-none focus:border-primary-purple",
 							error && "border-red-500 focus:border-red-500",
 							className
 						)}

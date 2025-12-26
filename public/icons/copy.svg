@@ -8,7 +8,7 @@
 										stroke-width="2"
 										stroke-linecap="round"
 										stroke-linejoin="round"
-										className="lucide lucide-copy text-[#9013fe]"
+										className="lucide lucide-copy text-primary-purple"
 									>
 										<rect
 											width="14"

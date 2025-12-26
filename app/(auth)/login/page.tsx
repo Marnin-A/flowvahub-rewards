@@ -87,7 +87,7 @@ export default function Login() {
 						<div className="flex justify-end my-2">
 							<Link
 								href="/forgot-password"
-								className="text-sm text-[#9013fe] no-underline font-medium hover:underline"
+								className="text-sm text-primary-purple no-underline font-medium hover:underline"
 							>
 								Forgot Password?
 							</Link>
@@ -96,7 +96,7 @@ export default function Login() {
 						<button
 							type="submit"
 							disabled={isSubmitting}
-							className="w-full text-base h-[55px] flex justify-center gap-2 items-center p-[11px] text-center bg-[#9013FE] text-white font-medium border-none transition-colors ease-linear duration-200 rounded-[100px] hover:bg-[#6D28D9] disabled:opacity-50 disabled:cursor-not-allowed"
+							className="w-full text-base h-[55px] flex justify-center gap-2 items-center p-[11px] text-center bg-primary-purple text-white font-medium border-none transition-colors ease-linear duration-200 rounded-[100px] hover:bg-[#6D28D9] disabled:opacity-50 disabled:cursor-not-allowed"
 						>
 							{isSubmitting ? (
 								<>
@@ -121,7 +121,7 @@ export default function Login() {
 							Don't have an account?{" "}
 							<Link
 								href="/signup"
-								className="text-[#9013fe] no-underline font-medium hover:underline"
+								className="text-primary-purple no-underline font-medium hover:underline"
 							>
 								Sign up
 							</Link>

@@ -72,13 +72,13 @@ export default function ReferAndEarn() {
 					<div className="space-y-6">
 						<div className="flex justify-between mb-4">
 							<div className="text-center p-2 flex-1">
-								<div className="text-2xl font-semibold text-[#9013fe]">
+								<div className="text-2xl font-semibold text-primary-purple">
 									{stats.referral_count}
 								</div>
 								<div className="text-gray-600">Referrals</div>
 							</div>
 							<div className="text-center p-2 flex-1">
-								<div className="text-2xl font-semibold text-[#9013fe]">
+								<div className="text-2xl font-semibold text-primary-purple">
 									{stats.points_earned_from_referrals}
 								</div>
 								<div className="text-gray-600">Points Earned</div>

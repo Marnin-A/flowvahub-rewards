@@ -58,9 +58,9 @@ export default function DailyStreak() {
 						<div
 							key={index}
 							className={`h-10 w-10 rounded-full flex items-center justify-center text-sm font-semibold transition-all duration-200 ${streakStatus.streak_days[index]
-									? "bg-[#9013fe] text-white"
-									: "bg-gray-200 text-gray-500"
-								} ${index === activeDay ? "ring-2 ring-[#9013fe] ring-offset-2" : ""}`}
+								? "bg-primary-purple text-white"
+								: "bg-gray-200 text-gray-500"
+								} ${index === activeDay ? "ring-2 ring-primary-purple ring-offset-2" : ""}`}
 						>
 							{streakStatus.streak_days[index] ? "✓" : day}
 						</div>

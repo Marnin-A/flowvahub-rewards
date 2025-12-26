@@ -44,7 +44,7 @@ export default function ShareYourStack() {
 	return (
 		<MorePointsCard>
 			<div className="p-4 border border-b-[#f3f4f6] border-t-0 border-r-0 border-l-0 bg-white flex items-center gap-3">
-				<div className="w-[40px] h-[40px] rounded-[10px] flex items-center justify-center shrink-0 bg-[rgba(144,19,254,0.1)] text-[#9013fe]">
+				<div className="w-[40px] h-[40px] rounded-[10px] flex items-center justify-center shrink-0 bg-[rgba(144,19,254,0.1)] text-primary-purple">
 					<Share2 className="text-primary-purple" />
 				</div>
 				<div>
@@ -61,7 +61,7 @@ export default function ShareYourStack() {
 					</div>
 					<button
 						onClick={() => setIsModalOpen(true)}
-						className="bg-[#eef2ff] hover:text-white hover:bg-[#9013fe] group text-primary-purple py-2 px-4 rounded-full font-semibold text-sm transition-all duration-200 inline-flex items-center gap-2 border-0"
+						className="bg-[#eef2ff] hover:text-white hover:bg-primary-purple group text-primary-purple py-2 px-4 rounded-full font-semibold text-sm transition-all duration-200 inline-flex items-center gap-2 border-0"
 					>
 						<Share2 className="text-primary-purple group-hover:text-white" />
 						Share

@@ -5,7 +5,7 @@ export default function ReferAndWin() {
 	return (
 		<MorePointsCard>
 			<div className="p-4 border border-b-[#f3f4f6] border-t-0 border-r-0 border-l-0 bg-white flex items-center gap-3">
-				<div className="w-[40px] h-[40px] rounded-[10px] flex items-center justify-center shrink-0 bg-[rgba(228,144,230,0.1)] text-[#9013fe]">
+				<div className="w-[40px] h-[40px] rounded-[10px] flex items-center justify-center shrink-0 bg-[rgba(228,144,230,0.1)] text-primary-purple">
 					<Image
 						src="/icons/star.svg"
 						alt="star"

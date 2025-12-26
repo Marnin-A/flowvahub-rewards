@@ -32,7 +32,7 @@ const PasswordInput = React.forwardRef<HTMLInputElement, PasswordInputProps>(
 							id={inputId}
 							ref={ref}
 							className={cn(
-								"peer w-full border py-[11px] px-[14px] text-base border-[#EDE9FE] transition-all ease-linear duration-200 rounded-md outline-none focus:border-[#9013fe] pr-16",
+								"peer w-full border py-[11px] px-[14px] text-base border-[#EDE9FE] transition-all ease-linear duration-200 rounded-md outline-none focus:border-primary-purple pr-16",
 								className,
 								error && "border-red-500 focus:border-red-500"
 							)}
@@ -48,7 +48,7 @@ const PasswordInput = React.forwardRef<HTMLInputElement, PasswordInputProps>(
 					<button
 						type="button"
 						onClick={() => setShowPassword(!showPassword)}
-						className="absolute right-3 border-none text-[#A78BFA] h-fit font-medium text-xs top-0 bottom-0 m-auto hover:text-[#9013fe] transition-colors"
+						className="absolute right-3 border-none text-[#A78BFA] h-fit font-medium text-xs top-0 bottom-0 m-auto hover:text-primary-purple transition-colors"
 					>
 						{showPassword ? "Hide" : "Show"}
 					</button>

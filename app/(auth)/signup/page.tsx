@@ -156,7 +156,7 @@ function SignupForm() {
 						<button
 							type="submit"
 							disabled={isSubmitting}
-							className="w-full text-base h-[55px] flex justify-center gap-2 items-center p-[11px] text-center bg-[#9013FE] text-white font-medium border-none transition-colors ease-linear duration-200 rounded-[100px] hover:bg-[#6D28D9] disabled:opacity-50 disabled:cursor-not-allowed mt-4"
+							className="w-full text-base h-[55px] flex justify-center gap-2 items-center p-[11px] text-center bg-primary-purple text-white font-medium border-none transition-colors ease-linear duration-200 rounded-[100px] hover:bg-[#6D28D9] disabled:opacity-50 disabled:cursor-not-allowed mt-4"
 						>
 							{isSubmitting ? (
 								<>
@@ -181,7 +181,7 @@ function SignupForm() {
 							Already have an account{" "}
 							<Link
 								href="/login"
-								className="text-[#9013fe] no-underline font-medium hover:underline"
+								className="text-primary-purple no-underline font-medium hover:underline"
 							>
 								Log In
 							</Link>

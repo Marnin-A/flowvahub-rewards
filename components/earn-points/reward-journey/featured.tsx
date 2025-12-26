@@ -47,7 +47,7 @@ export default function Featured() {
 			</div>
 			<div className="p-4">
 				<div className="flex justify-start mb-4">
-					<div className="w-[24px] h-[24px] animate-pulse bg-[#eef2ff] rounded-[6px] flex items-center justify-center mr-1 shrink-0 text-[#9013fe]">
+					<div className="w-[24px] h-[24px] animate-pulse bg-[#eef2ff] rounded-[6px] flex items-center justify-center mr-1 shrink-0 text-primary-purple">
 						<Image
 							src="/icons/calendar-2.svg"
 							alt="calendar"
@@ -71,7 +71,7 @@ export default function Featured() {
 			<div className="px-4 py-[5px] flex justify-between items-center border border-t-[#f3f4f6] border-b-0 border-r-0 border-l-0">
 				<Button
 					onClick={handleSignUp}
-					className="bg-[#9013fe] hover:bg-[#8628da] text-white py-2 px-4 cursor-pointer rounded-full font-semibold transition-all duration-200 flex items-center justify-center gap-2 border-0"
+					className="bg-primary-purple hover:bg-[#8628da] text-white py-2 px-4 cursor-pointer rounded-full font-semibold transition-all duration-200 flex items-center justify-center gap-2 border-0"
 				>
 					<Image
 						src="/icons/user-plus.svg"
@@ -133,7 +133,7 @@ export default function Featured() {
 								type="email"
 								id="email"
 								placeholder="user@example.com"
-								className=" peer w-full border text-base py-[10px] px-[14px]  border-[#EDE9FE] transition-all ease-linear duration-200 rounded-md outline-none focus:border-[#9013fe]"
+								className=" peer w-full border text-base py-[10px] px-[14px]  border-[#EDE9FE] transition-all ease-linear duration-200 rounded-md outline-none focus:border-primary-purple"
 								required
 
 							/>
