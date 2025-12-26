@@ -6,7 +6,8 @@ import './globals.css';
 
 const roboto = Roboto({
   variable: '--font-roboto',
-  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  subsets: ['latin', 'latin-ext'],
 });
 
 export const metadata: Metadata = {
@@ -23,9 +24,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${roboto.variable} antialiased bg-gray-50 flex flex-col md:flex-row min-h-dvh lg:h-screen  lg:md:overflow-hidden w-full`}
-      >
+      <body className={`${roboto.variable} antialiased bg-gray-50`}>
         <QueryProvider>
           <AntdRegistry>{children}</AntdRegistry>
         </QueryProvider>

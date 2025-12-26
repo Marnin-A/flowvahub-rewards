@@ -4,16 +4,15 @@ import RedeemPoints from '@/components/redeem-rewards';
 import { Tabs, TabsProps } from 'antd';
 
 export default async function Home() {
-  await new Promise(resolve => setTimeout(resolve, 10000));
   const items: TabsProps['items'] = [
     {
       key: 'earn',
-      label: 'Earn Points',
+      label: <span className="text-base">Earn Points</span>,
       children: <EarnPoints />,
     },
     {
       key: 'redeem',
-      label: 'Redeem Points',
+      label: <span className="text-base">Redeem Rewards</span>,
       children: <RedeemPoints />,
     },
   ];

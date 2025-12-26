@@ -52,6 +52,8 @@
   --radius-3xl: calc(var(--radius) + 12px);
   --radius-4xl: calc(var(--radius) + 16px);
   --text-xxs: 0.625rem;
+  --animate-shake-once: shake-once 0.6s;
+  --animate-small-pulse-scale: small-pulse-scale 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
 :root {
@@ -198,6 +200,28 @@
   }
   50% {
     transform: scale(1.4);
+    opacity: 0.8;
+  }
+}
+@keyframes shake-once {
+  0% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-2px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+@keyframes small-pulse-scale {
+  0%,
+  100% {
+    transform: scale(0.9);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
     opacity: 0.8;
   }
 }
