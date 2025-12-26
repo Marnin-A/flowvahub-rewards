@@ -6,7 +6,7 @@ export default function Header() {
   return (
     <header>
       <div className="flex items-center justify-between">
-        <h1 className="text-xl md:text-2xl font-medium">Rewards Hub</h1>
+        <h1 className="text-xl md:text-2xl font-normal">Rewards Hub</h1>
         <div className="flex items-center gap-3">
           <Notification />
           <form action={signOut}>
