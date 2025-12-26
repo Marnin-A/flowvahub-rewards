@@ -104,7 +104,8 @@ export async function signInWithGoogle() {
 
   // The redirect URL should be your app's callback route
   // Include mode=signin to indicate this is a sign-in attempt (not signup)
-  const redirectUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/auth/callback?mode=signin`;
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://flowvahub-rewards-tau.vercel.app';
+  const redirectUrl = `${baseUrl}/auth/callback?mode=signin`;
 
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: 'google',
@@ -130,8 +131,8 @@ export async function signUpWithGoogle(referralCode?: string) {
 
   // The redirect URL should be your app's callback route
   // Include mode=signup to indicate this is a signup attempt
-  let redirectUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/auth/callback?mode=signup`;
-  console.log('redirectUrl', redirectUrl);
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://flowvahub-rewards-tau.vercel.app';
+  let redirectUrl = `${baseUrl}/auth/callback?mode=signup`;
 
   // Include referral code if provided
   if (referralCode) {
