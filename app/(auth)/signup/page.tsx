@@ -138,6 +138,7 @@ function SignupForm() {
 							placeholder="••••••••"
 							error={errors.password?.message}
 							{...register("password")}
+							bodyClassName="mb-5"
 						/>
 
 						{/* Real-time password requirements - only show when typing */}
