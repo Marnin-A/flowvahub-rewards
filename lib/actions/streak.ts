@@ -1,6 +1,7 @@
 "use server";
 
 import { createClient } from "@/lib/supabase/server";
+import { createAdminClient } from "@/lib/supabase/admin";
 import { revalidatePath } from "next/cache";
 import type { StreakStatus } from "@/types/database";
 
@@ -49,9 +50,11 @@ export async function getStreakStatus(): Promise<StreakStatus | null> {
     const mondayOffset = dayOfWeek === 0 ? -6 : 1 - dayOfWeek;
     const monday = new Date(today);
     monday.setDate(today.getDate() + mondayOffset);
+    monday.setHours(0, 0, 0, 0);
 
-    // Get transactions for this week
-    const { data: transactions } = await supabase
+    // Use admin client to bypass RLS for reading transactions
+    const adminClient = createAdminClient();
+    const { data: transactions, error: txError } = await adminClient
         .from("point_transactions")
         .select("created_at")
         .eq("user_id", user.id)
@@ -59,12 +62,22 @@ export async function getStreakStatus(): Promise<StreakStatus | null> {
         .gte("created_at", monday.toISOString())
         .order("created_at", { ascending: true });
 
+    if (txError) {
+        console.error("Error fetching streak transactions:", txError);
+    }
+
     // Create array of 7 booleans for each day of the week
     const streakDays = Array(7).fill(false);
     if (transactions) {
         transactions.forEach((tx) => {
             const txDate = new Date(tx.created_at);
-            const txDay = txDate.getDay();
+            // Normalize to local date for comparison
+            const txLocalDate = new Date(
+                txDate.getFullYear(),
+                txDate.getMonth(),
+                txDate.getDate()
+            );
+            const txDay = txLocalDate.getDay();
             const index = txDay === 0 ? 6 : txDay - 1; // Convert to Monday=0, Sunday=6
             streakDays[index] = true;
         });
@@ -80,6 +93,7 @@ export async function getStreakStatus(): Promise<StreakStatus | null> {
 
 export async function claimDailyStreak() {
     const supabase = await createClient();
+    const adminClient = createAdminClient();
 
     const {
         data: { user },
@@ -128,8 +142,8 @@ export async function claimDailyStreak() {
         }
     }
 
-    // Update profile
-    const { error: updateError } = await supabase
+    // Update profile using admin client
+    const { error: updateError } = await adminClient
         .from("profiles")
         .update({
             current_streak: newStreak,
@@ -139,20 +153,25 @@ export async function claimDailyStreak() {
         .eq("id", user.id);
 
     if (updateError) {
+        console.error("Error updating profile:", updateError);
         return { error: updateError.message };
     }
 
-    // Record transaction
-    await supabase.from("point_transactions").insert({
+    // Record transaction using admin client (RLS blocks INSERT)
+    const { error: txError } = await adminClient.from("point_transactions").insert({
         user_id: user.id,
         amount: STREAK_POINTS,
         type: "streak",
         description: `Daily streak day ${newStreak}`,
     });
 
+    if (txError) {
+        console.error("Error inserting transaction:", txError);
+    }
+
     // Create streak notification if milestone reached
     if (newStreak === 7 || newStreak === 30 || newStreak === 100) {
-        await supabase.from("notifications").insert({
+        await adminClient.from("notifications").insert({
             user_id: user.id,
             type: "streak",
             title: `${newStreak} Day Streak! 🔥`,
