@@ -110,8 +110,9 @@ export async function signInWithGoogle() {
     const supabase = await createClient();
 
     // The redirect URL should be your app's callback route
+    // Include mode=signin to indicate this is a sign-in attempt (not signup)
     const redirectUrl =
-        `${process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"}/auth/callback`;
+        `${process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"}/auth/callback?mode=signin`;
 
     const { data, error } = await supabase.auth.signInWithOAuth({
         provider: "google",
@@ -130,6 +131,38 @@ export async function signInWithGoogle() {
     }
 
     return { error: "Failed to initiate Google login" };
+}
+
+export async function signUpWithGoogle(referralCode?: string) {
+    const supabase = await createClient();
+
+    // The redirect URL should be your app's callback route
+    // Include mode=signup to indicate this is a signup attempt
+    let redirectUrl =
+        `${process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"}/auth/callback?mode=signup`;
+
+    // Include referral code if provided
+    if (referralCode) {
+        redirectUrl += `&ref=${encodeURIComponent(referralCode)}`;
+    }
+
+    const { data, error } = await supabase.auth.signInWithOAuth({
+        provider: "google",
+        options: {
+            redirectTo: redirectUrl,
+        },
+    });
+
+    if (error) {
+        console.error("Google OAuth error:", error);
+        return { error: error.message };
+    }
+
+    if (data.url) {
+        redirect(data.url);
+    }
+
+    return { error: "Failed to initiate Google signup" };
 }
 
 export async function signOut() {

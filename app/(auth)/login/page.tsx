@@ -113,7 +113,7 @@ export default function Login() {
 					<FormDivider />
 
 					{/* Social Login */}
-					<SocialLoginButton provider="google" />
+					<SocialLoginButton provider="google" mode="signin" />
 
 					{/* Footer */}
 					<div className="text-center mt-5 text-sm">

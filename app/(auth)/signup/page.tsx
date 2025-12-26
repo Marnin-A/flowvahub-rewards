@@ -173,7 +173,7 @@ function SignupForm() {
 					<FormDivider />
 
 					{/* Social Login */}
-					<SocialLoginButton provider="google" />
+					<SocialLoginButton provider="google" mode="signup" referralCode={referralCode} />
 
 					{/* Footer */}
 					<div className="text-center mt-5 text-sm">
