@@ -97,7 +97,7 @@ function SignupForm() {
 					</p>
 					{referralCode && (
 						<p className="text-xs text-green-600 text-center mt-2 bg-green-50 py-2 rounded-md">
-							🎉 You were referred! You'll both earn bonus points.
+							🎉 You were referred with this code: <span className="font-medium">{referralCode}</span>
 						</p>
 					)}
 				</div>
@@ -138,6 +138,7 @@ function SignupForm() {
 							placeholder="••••••••"
 							error={errors.password?.message}
 							{...register("password")}
+							bodyClassName="mb-5"
 						/>
 
 						{/* Real-time password requirements - only show when typing */}
@@ -155,7 +156,7 @@ function SignupForm() {
 						<button
 							type="submit"
 							disabled={isSubmitting}
-							className="w-full text-base h-[55px] flex justify-center gap-2 items-center p-[11px] text-center bg-[#9013FE] text-white font-medium border-none transition-colors ease-linear duration-200 rounded-[100px] hover:bg-[#6D28D9] disabled:opacity-50 disabled:cursor-not-allowed mt-4"
+							className="w-full text-base h-[55px] flex justify-center gap-2 items-center p-[11px] text-center bg-primary-purple text-white font-medium border-none transition-colors ease-linear duration-200 rounded-[100px] hover:bg-[#6D28D9] disabled:opacity-50 disabled:cursor-not-allowed mt-4"
 						>
 							{isSubmitting ? (
 								<>
@@ -172,7 +173,7 @@ function SignupForm() {
 					<FormDivider />
 
 					{/* Social Login */}
-					<SocialLoginButton provider="google" />
+					<SocialLoginButton provider="google" mode="signup" referralCode={referralCode} />
 
 					{/* Footer */}
 					<div className="text-center mt-5 text-sm">
@@ -180,7 +181,7 @@ function SignupForm() {
 							Already have an account{" "}
 							<Link
 								href="/login"
-								className="text-[#9013fe] no-underline font-medium hover:underline"
+								className="text-primary-purple no-underline font-medium hover:underline"
 							>
 								Log In
 							</Link>
